@@ -1,0 +1,13 @@
+#divA, #divB, #divE, #divC, #divD{
+    background-color: #000;
+    height: 100px;
+    margin-bottom: 5px;
+    max-width: 100px;
+}
+#divA, #divC{
+    background-color:#ffcc00;
+}
+#divB{
+    min-height: 800px;
+    background-color: #fff;
+}

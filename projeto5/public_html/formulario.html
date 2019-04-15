@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Título</title>		
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <link href="css/estilo.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="js/localization/messages_pt_BR.min.js" type="text/javascript"></script>
+        <script src="js/jquery.mask.min.js" type="text/javascript"></script>
+        <script src="js/notify.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+             jQuery.validator.addMethod("nome completo",
+            function(value,element){
+               
+                if (value.toLowerCase().indexOf("nome completo") >= 0){
+                    return true
+           
+                     jQuery.validator.addMethod("cpf valido",
+            function(value,element){
+                
+                if (value.toLowerCase().indexOf("cpf valido") >= 0){
+                    return true
+          
+            jQuery.validator.addMethod("veia",
+            function(value,element){
+                //verifica se tem Véia
+                if (value.toLowerCase().indexOf("véia") >= 0){
+                    return true
+                }else{
+                    return false
+                }
+            },"Sua professora não é véia?")
+            
+            jQuery.validator.addMethod("data valida",
+            function(value,element){
+                var data = value.split("/")
+                var ano = parseInt(data[2]) //terceira posição da data
+                var dataAtual = new Date()
+                var anoAtual = dataAtual.getFullYear()
+                if (ano < anoAtual){
+                    return true
+                }else{
+                    return false
+                }
+            },"data valida")
+    
+            //quando a página carrega
+            $(document).ready(function(){
+                
+                
+                $("#dataNascimento").mask("00/00/0000")
+                
+                $("#formulario").validate({
+                    rules: {
+                        nome : {
+                            nome completo:true,
+                            required:true
+                            
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                        },
+                        cpf: {
+                            cpfBR: true,
+                            required: true,
+                        },
+                        professora: {
+                            veia: true,
+                            required: true,
+                        },
+                        dataNascimento: {
+                            dateITA: true,
+                            required: true,
+                            data valida:true,
+                        }
+                    },
+                    submitHandler: function(form){
+                        $.notify("Cadastrado com sucesso", "success");
+                        //alert("Cadastrado com sucesso")
+                    }
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="divA" class="col-12 col-md-6">                
+                    <a href="index.html">Home</a>
+                    <a href="praca_nossa.html">A Praça é Nossa</a>
+                    <a href="formulario.html">Contato</a>
+                </div>
+                <div id="divE" class="col-12 col-md-6">                
+                </div>
+            </div>
+            <div class="row">
+                <div id="divB" class="col-12">                
+                    <form id="formulario" name="formulario">
+                        <div class="form-group">
+                            <label>nome completo</label>
+                            <input type="text" name="nome completo" id="nome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>CPF</label>
+                            <input type="text" name="telefone" id="telefone" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input type="email" name="email" id="email" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Primeira professora</label>
+                            <input type="text" name="professora" id="professora" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Data de nascimento</label>
+                            <input type="text" name="dataNascimento" id="dataNascimento" class="form-control" />
+                        </div>
+                        <input type="submit" name="enviar" value="Enviar" class="btn btn-dark" />
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div id="divC" class="col-12 col-md-6">                
+                </div>
+                <div id="divD" class="col-12 col-md-6">                
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
